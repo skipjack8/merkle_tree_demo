@@ -9,7 +9,7 @@ use rand::{thread_rng, Rng};
 
 pub type CircuitTree = SparseMerkleTree<Leaf<Bn256>, Fr, RescueHasher<Bn256>>;
 
-pub fn generate_witness(position: u32) -> MerklePathAuthCircuit<'static, Bn256> {
+pub fn generate_witness(position: u32) -> (MerklePathAuthCircuit<'static, Bn256>, Fr) {
     let tree: CircuitTree = generate_random_tree();
 
     let path: Vec<Option<Fr>> = tree
@@ -28,13 +28,15 @@ pub fn generate_witness(position: u32) -> MerklePathAuthCircuit<'static, Bn256> 
 
     let position = Fr::from_str(&position.to_string()).unwrap();
 
-    MerklePathAuthCircuit {
-        params: &RESCUE_PARAMS,
-        root: Some(root),
-        leaf,
-        path,
-        position: Some(position),
-    }
+    (
+        MerklePathAuthCircuit {
+            params: &RESCUE_PARAMS,
+            leaf,
+            path,
+            position: Some(position),
+        },
+        root,
+    )
 }
 
 fn generate_random_tree() -> CircuitTree {

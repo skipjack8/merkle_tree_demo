@@ -13,7 +13,7 @@ use franklin_crypto::bellman::Field;
 use rand::thread_rng;
 
 fn main() {
-    let merkle_path_auth_circuit = generate_witness(10);
+    let (merkle_path_auth_circuit, public_input) = generate_witness(10);
 
     //set up
     let rng = &mut thread_rng();
@@ -26,6 +26,5 @@ fn main() {
     println!("{:?}", proof);
 
     //verify
-    // let pub_input = Fr::one();
-    assert!(verify_proof(&pvk, &proof, &[]).unwrap());
+    assert!(verify_proof(&pvk, &proof, &[public_input]).unwrap());
 }
