@@ -1,0 +1,14 @@
+[package]
+name = "MerkleTreeDemo"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+franklin_crypto = {package = "franklin-crypto", version = "0.0.5", git = "https://github.com/matter-labs/franklin-crypto", branch = "beta"}
+fnv = "1.0.3"
+serde = "1.0"
+rayon = "1.0.3"
+lazy_static = "1.2.0"
+rand = "0.4"
